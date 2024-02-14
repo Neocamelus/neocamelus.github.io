@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <atom:link href="/rss.xml" rel="self" type="application/rss+xml" />
+    <title>Stapy</title>
+    <description>John Doe, Software developer</description>
+    <link>/</link>
+    <item>
+  <title>Zaardoz et le RP sur GTA V</title>
+  <pubDate>Wed, 14 Feb 2024 00:00:00 GMT</pubDate>
+  <link>/blog/Zaardoz.html</link>
+  <guid>/blog/Zaardoz.html</guid>
+  <description>Zoom sur les rolistes</description>
+</item>
+<item>
+  <title>How to add a new blog post?</title>
+  <pubDate>Fri, 10 Dec 2021 00:00:00 GMT</pubDate>
+  <link>/blog/how-to-add-a-new-blog-post.html</link>
+  <guid>/blog/how-to-add-a-new-blog-post.html</guid>
+  <description>Add new json with page data and HTML content file.</description>
+</item>
+<item>
+  <title>How to host my static website for free?</title>
+  <pubDate>Fri, 10 Sep 2021 00:00:00 GMT</pubDate>
+  <link>/blog/how-to-host-my-website-for-free.html</link>
+  <guid>/blog/how-to-host-my-website-for-free.html</guid>
+  <description>Host your static website for free on a CDN.</description>
+</item>
+<item>
+  <title>How to use Stapy on Windows?</title>
+  <pubDate>Wed, 14 Jul 2021 00:00:00 GMT</pubDate>
+  <link>/blog/how-to-use-stapy-site-generator-on-windows.html</link>
+  <guid>/blog/how-to-use-stapy-site-generator-on-windows.html</guid>
+  <description>Install Python and start to create your static website on Windows.</description>
+</item>
+  </channel>
+</rss>

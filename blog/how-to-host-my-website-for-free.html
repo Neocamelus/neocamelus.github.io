@@ -1,0 +1,143 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How to host my static website for free?</title>
+<meta name="description" content="Host your static website for free on a CDN." />
+<link rel="stylesheet" href="/css/pure-min.css" />
+<link rel="stylesheet" href="/css/grids-responsive-min.css" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<meta name="robots" content="index,follow" />
+</head>
+<body>
+<div class="pure-g">
+<div class="sidebar pure-u-1 pure-u-md-1-4">
+<div class="sidebar-content">
+<a href="/"><img src="/media/logo.png" alt="Pure" /></a>
+<p>A blog template built with Pure</p>
+<nav class="nav">
+<ul>
+<li class="menu-item first"><a class="pure-button" href="/">Articles</a></li>
+<li class="menu-item"><a class="pure-button" href="/elements.html">Elements</a></li>
+<li class="menu-item"><a class="pure-button" href="/about.html">About</a></li>
+<li class="menu-item last"><a class="pure-button" href="/contact.html">Contact</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class="right pure-u-1 pure-u-md-3-4">
+<div class="content-container">
+<div class="content">
+<p class="subhead"><a href="/">Articles</a> &gt; How to host my static website for free?</p>
+<section class="post">
+<header class="post-header">
+<h1 class="post-title"><a href="/blog/how-to-host-my-website-for-free.html">How to host my static website for free?</a></h1>
+<p class="post-meta">
+September 10, 2021 by <span class="post-author">Stapy</span> <span class="categories"><span class="post-category category-hosting">Hosting</span></span>
+</p>
+</header>
+<div class="post-description">
+<p>
+Host your static website for free on a CDN.
+</p>
+</div>
+</section>
+<p>There are many tools to publish your site for free:</p>
+<ul>
+<li>Cloudflare Pages</li>
+<li>GitHub Pages</li>
+<li>Gitlab Pages</li>
+<li>Vercel</li>
+<li>Netlify</li>
+<li>Render</li>
+</ul>
+<p>And certainly still others.</p>
+<p>In any case, you just have to share the content of the <code>web/prod</code> folder. Here is the way to host your website on <strong>GitHub Pages</strong>.</p>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>Free hosting on GitHub Pages is only available with a <strong>public repository</strong>. <strong>Never share or upload sensitives data</strong>. Private repository for GitHub Pages is only available with Team plan.</li>
+<li>Cloudflare, Vercel, Netlify and Render clone a GitHub or a Gitlab repository, public or private.</li>
+<li>I recommend always using a <code>www</code> subdomain</li>
+<li>When you add or update files on GitHub, you have to wait a few minutes before publishing</li>
+</ul>
+<h2>Step 1</h2>
+<p>Without a personal domain name, the website URL will be: <code>https://username.github.io</code>, where username is your username on GitHub.</p>
+<p>You can order a domain name from your favorite registrar like <a href="https://www.gandi.net">Gandi</a>, or do it later.</p>
+<h2>Step 2</h2>
+<p>Configure Stapy with the full host as the base URL for the prod environment:</p>
+<pre><code>source
++--- layout
+     +--- common.json
+</code></pre>
+<pre><code>{
+  &quot;url.local&quot;: &quot;http://127.0.0.1:1985/&quot;,
+  &quot;url.prod&quot;: &quot;https://www.example.com/&quot;
+}
+</code></pre>
+<p>The website URL will be here: <code>https://www.example.com/</code>. Without a personal domain name, set <code>https://username.github.io/</code>.</p>
+<h2>Step 3</h2>
+<p><em>This step is optional without a personal domain mame.</em></p>
+<p>We need to tell GitHub Pages our domain name. That can be done by creating a CNAME file containing the domain.</p>
+<pre><code>source
++--- assets
+     +--- CNAME
+</code></pre>
+<pre><code>www.example.com
+</code></pre>
+<p>The CNAME file in the <code>assets</code> directory will be copied to the website root.</p>
+<h2>Step 4</h2>
+<p>Build the website:</p>
+<pre><code>python stapy.py build
+</code></pre>
+<p>On Windows double-click on <code>build.py</code>.</p>
+<p>The website files to be published are now in the <code>web/prod</code> directory.</p>
+<h2>Step 5</h2>
+<p>On GitHub, create a new public repository named <code>username.github.io</code> where username is your username on GitHub.</p>
+<h2>Step 6</h2>
+<p>Add files to the GitHub repository with:</p>
+<h3>1. Web interface (beginner)</h3>
+<p>You can upload files from the <code>web/prod</code> directory to GitHub with the web interface.</p>
+<p>Drag all files, then commit.</p>
+<h3>2. Git Client (intermediate)</h3>
+<p>On Windows or macOS you can use a Git client like <a href="https://desktop.github.com/">GitHub Desktop</a>.</p>
+<p>On Linux <a href="https://www.gitkraken.com/">GitKraken</a> is a good client.</p>
+<h3>3. Command line (expert)</h3>
+<p>Commit and push all the static files (<code>web/prod</code>) on the GitHub repository.</p>
+<pre><code>cd web/prod
+git init
+git add -A
+git commit -m &quot;first commit&quot;
+git branch -M main
+git remote add origin https://github.com/{username}/{username}.github.io.git
+git push -u origin main
+</code></pre>
+<h2>Step 7</h2>
+<p><em>This step is optional without a personal domain mame.</em></p>
+<p>From the registrar, edit the DNS zone and add a CNAME record for the <code>www</code> subdomain:</p>
+<ul>
+<li><strong>Type:</strong> CNAME</li>
+<li><strong>Host Name:</strong> www</li>
+<li><strong>Points to:</strong> username.github.io</li>
+<li><strong>TTL:</strong> 1 hour</li>
+</ul>
+<h2>Step 8</h2>
+<p>On your GitHub repository, go to <strong>Settings</strong> &gt; <strong>Pages</strong>. Enable <strong>Pages</strong> for the root directory on the main branch.</p>
+<p>Add your custom domain (www.example.com) and enforce HTTPS.</p>
+<p><strong>Note:</strong> GitHub waits for DNS propagation before generating the SSL certificate. This can take a while.</p>
+</div>
+<div class="footer">
+<div class="pure-menu pure-menu-horizontal">
+<ul>
+<li class="pure-menu-item"><a href="/about.html" class="pure-menu-link">About</a></li>
+<li class="pure-menu-item"><a href="https://purecss.io" class="pure-menu-link">Pure CSS</a></li>
+<li class="pure-menu-item"><a href="https://www.stapy.net" class="pure-menu-link">Stapy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
